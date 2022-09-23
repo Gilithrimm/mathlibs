@@ -1,15 +1,18 @@
 package com.safenar.math;
 
+import java.util.Arrays;
+import java.util.OptionalDouble;
+
 public class MyMath {
 //    public static boolean inRangeOptimized(int needle, Range haystack){
 //
 //    }
 
-//    public static int randomInRange(Range range){
+    //    public static int randomInRange(Range range){
 //        return new Random().nextInt(range.getLength())+range.getMin();
 //    }
-    public static boolean isNatural(int number){
-        return number== Math.abs(number);
+    public static boolean isNatural(int number) {
+        return number == Math.abs(number);
     }
 //
 //    public int getSum() {
@@ -63,13 +66,40 @@ public class MyMath {
 //        return mode;
 //    }
 
-    public static boolean isPrime(int number){
-        if(number<2)return false;
-        if(number==2)return true;
-        if(number%2==0)return false;
-        for(int i=3;i*i<=number;i+=2){
-            if(number%i==0)return false;
+    public static boolean isPrime(int number) {
+        if (number < 2) return false;
+        if (number == 2) return true;
+        if (number % 2 == 0) return false;
+        for (int i = 3; i * i <= number; i += 2) {
+            if (number % i == 0) return false;
         }
         return true;
+    }
+
+    public static double divAvgHigh(Generator g) throws MathException {
+        int[] generated=new int[100];
+        for (int i = 0; i < generated.length; i++) {
+            generated[i]=g.generate(++i)/g.generate(--i);
+        }
+        OptionalDouble result= Arrays.stream(generated).average();
+        if (result.isPresent())
+            return result.getAsDouble();
+        throw mathExp("divAvgHigh(): average is null");
+    }
+
+    private static MathException mathExp(String output) {
+        return new MathException(output);
+    }
+
+    public static double divAvgLow(Generator g) throws MathException {
+        int[] generated=new int[100];
+        for (int i = 0; i < generated.length;) {
+            generated[i]=g.generate(i)/g.generate(++i);
+        }
+
+        OptionalDouble result= Arrays.stream(generated).average();
+        if (result.isPresent())
+            return result.getAsDouble();
+        throw mathExp("divAvgLow(): average is null");
     }
 }

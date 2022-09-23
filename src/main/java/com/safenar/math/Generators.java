@@ -7,14 +7,7 @@ public enum Generators implements Generator{
     ABS(Math::abs),
     HASH(new HashGenerator(SELF)),
     POW(x -> x*x),
-    FIBONACCI(new Generator() {
-        @Override
-        public int generate(int x) {
-            if (x==0) return 0;
-            if (x==1) return 1;
-            return generate(x-2)+generate(x-1);
-        }
-    }),
+    FIBONACCI(new FibonacciGenerator(1,1)),
     ;
 
     private final Generator gen;

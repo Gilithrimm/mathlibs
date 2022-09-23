@@ -29,7 +29,7 @@ class SequenceTest {
     @Test
     void inSequence() {
         int exp=4;
-        assertTrue(tested.inSequence(exp));
+        assertTrue(tested.isInSequence(exp));
     }
 
     @Test

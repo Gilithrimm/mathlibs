@@ -23,7 +23,7 @@ public class Sequence {
                 .toArray();
     }
 
-    public boolean inSequence(int num){
+    public boolean isInSequence(int num){
         boolean result = num > getMin() && num < getMax();
         for (int i = getMin(); i < getMax(); i++) {
             if (num == value(i)){
