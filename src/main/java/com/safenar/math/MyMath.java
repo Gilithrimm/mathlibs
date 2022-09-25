@@ -4,11 +4,7 @@ import java.util.Arrays;
 import java.util.OptionalDouble;
 
 public class MyMath {
-//    public static boolean inRangeOptimized(int needle, Range haystack){
-//
-//    }
-
-    //    public static int randomInRange(Range range){
+//    public static int randomInRange(Range range){
 //        return new Random().nextInt(range.getLength())+range.getMin();
 //    }
     public static boolean isNatural(int number) {
@@ -101,5 +97,13 @@ public class MyMath {
         if (result.isPresent())
             return result.getAsDouble();
         throw mathExp("divAvgLow(): average is null");
+    }
+
+    public static boolean isInSequence(Sequence haystack,int needle){
+        if (haystack == null) return false;
+        for (int i = haystack.getMin(); i < haystack.getMax(); i++)
+            if (needle == haystack.value(i))
+                return true;
+        return false;
     }
 }

@@ -27,12 +27,6 @@ class SequenceTest {
     }
 
     @Test
-    void inSequence() {
-        int exp=4;
-        assertTrue(tested.isInSequence(exp));
-    }
-
-    @Test
     void indexOf(){
         int num=625;
         tested.setMax(1000);

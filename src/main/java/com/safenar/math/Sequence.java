@@ -13,7 +13,9 @@ public class Sequence {
     public Sequence(int min, int max, Generator generator) {
         this.min = min;
         this.max = max;
-        this.generator = generator;
+        this.generator = generator==null
+            ?Generators.NULL
+            :generator;
     }
 
     public int[] toArray(){
@@ -23,24 +25,13 @@ public class Sequence {
                 .toArray();
     }
 
-    public boolean isInSequence(int num){
-        boolean result = num > getMin() && num < getMax();
-        for (int i = getMin(); i < getMax(); i++) {
-            if (num == value(i)){
-                result = true;
-                break;
-            }
-        }
-        return result;
-    }
-
     public int indexOf(int y){
         for (int i = getMin(); i < getMax(); i++) {
             if (y == value(i)){
                 return i;
             }
         }
-        return 0;
+        throw new IndexOutOfBoundsException(y+"is out of bound for this sequence: "+ this);
     }
 
     public int getMin() {
@@ -69,7 +60,10 @@ public class Sequence {
     }
 
     public int value(int i) {
-        return Math.min(generator.generate(i), getMax());
+        int result=generator.generate(i);
+        if (result>generator.generate(getMax()))
+            throw new IndexOutOfBoundsException();
+        return result;
     }
 
     @Override
