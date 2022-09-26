@@ -44,14 +44,12 @@ public class Main {
             System.out.println("lucas Low = " + divAvgLow(lucas));
             //this goes for 6.5h wtf
         };
-        Code c2=()-> System.out.println(Generators.FIBONACCI.generate(50));//over 10h & still no result
-        //i think i messed up pretty badly
-        //it's just recursion fibonacci algorithm wtf
-        //if there would be no results till 21 ix 22 00:00 i halt it and run for 50 instead
-        //15h later still no results wtf
-        //i left it for a night and it's still going
-        //36h of no result
-        //halting
+        Code c2=()-> System.out.println(Generators.FIBONACCI.generate(48));
+        //41=>1s
+        //45=>6.5s
+        //47=>16.7s
+        //48=>25.6s
+
 
         measureTime(c2);
     }

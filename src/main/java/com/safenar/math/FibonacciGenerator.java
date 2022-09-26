@@ -1,5 +1,7 @@
 package com.safenar.math;
 
+import java.math.BigInteger;
+
 public class FibonacciGenerator implements Generator{
     int first,second;
 
@@ -10,8 +12,12 @@ public class FibonacciGenerator implements Generator{
 
     @Override
     public int generate(int x) {
-        if (x==0) return first;
-        if (x==1) return second;
-        return generate(x-2)+generate(x-1);
+        return generate((long) x).intValue();
+    }
+
+    public BigInteger generate(long x){
+        if (x==0) return BigInteger.valueOf(first);
+        if (x==1) return BigInteger.valueOf(second);
+        return generate(x-2).add(generate(x-1));
     }
 }
