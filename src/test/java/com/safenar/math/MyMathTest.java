@@ -91,4 +91,20 @@ class MyMathTest {
         boolean actual=isInSequence(seq,nonZero);
         assertFalse(actual);
     }
+
+    @Test
+    void sum_forNullSequence() {
+        Sequence seq=null;
+        int actual=sum(seq);
+        assertEquals(0,actual);
+    }
+    @Test
+    void sum_forNullGenerator(){
+        Sequence seq=new Sequence(0,10,null);
+        int actual=sum(seq);
+        assertEquals(0,actual);
+    }
+    @Test
+    void sum_for(){//what to test here?
+    }
 }

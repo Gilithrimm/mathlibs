@@ -106,4 +106,8 @@ public class MyMath {
                 return true;
         return false;
     }
+
+    public static int sum(Sequence seq){
+        return 0;
+    }
 }
