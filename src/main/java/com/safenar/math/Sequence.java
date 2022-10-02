@@ -18,11 +18,34 @@ public class Sequence {
             :generator;
     }
 
+    public int getMin() {
+        return min;
+    }
+    public int getMax() {
+        return max;
+    }
+    public Generator getGenerator() {
+        return generator;
+    }
+    public void setMin(int min) {
+        this.min = min;
+    }
+    public void setMax(int max) {
+        this.max = max;
+    }
+
     public int[] toArray(){
-        return IntStream.range(0, getMax()-getMin())
+        return IntStream.range(0, getMax()-getMin()+1)
                 .map(i -> value(min+i))
                 .distinct()
                 .toArray();
+    }
+
+    public int value(int i) {
+        int result=generator.generate(i);
+        if (result>generator.generate(getMax()))
+            throw new IndexOutOfBoundsException();
+        return result;
     }
 
     public int indexOf(int y){
@@ -34,36 +57,9 @@ public class Sequence {
         throw new IndexOutOfBoundsException(y+"is out of bound for this sequence: "+ this);
     }
 
-    public int getMin() {
-        return min;
-    }
-
-    public int getMax() {
-        return max;
-    }
-
-    public Generator getGenerator() {
-        return generator;
-    }
-
-    public void setMin(int min) {
-        this.min = min;
-    }
-
-    public void setMax(int max) {
-        this.max = max;
-    }
-
     @Override
     public String toString() {
         return Main.toString(Arrays.stream(toArray()).boxed().toArray());//why stream?
-    }
-
-    public int value(int i) {
-        int result=generator.generate(i);
-        if (result>generator.generate(getMax()))
-            throw new IndexOutOfBoundsException();
-        return result;
     }
 
     @Override

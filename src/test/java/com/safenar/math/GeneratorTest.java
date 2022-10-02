@@ -72,6 +72,7 @@ class GeneratorTest {
         ((HashGenerator) Generators.HASH.getGen()).setInner(main);
         assertEquals(main.hash(),main.hash2());
         assertEquals(other.hash(),other.hash2());
+        assertEquals(main.hash(),other.hash());
 //        if main.hash()==main.hash2()
 //        && other.hash()==other.hash2()
 //        && main.hash()==other.hash()

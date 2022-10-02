@@ -16,7 +16,7 @@ class GeneratorsTest {
             vals[i]=gens[i].generate(i);
         }
         //check
-        assertArrayEquals(new int[]{0,-1,2,3,-1733670794,25,8},vals);
+        assertArrayEquals(new int[]{0,-1,2,3,-1733670794,25,13},vals);
     }
 
     @Test

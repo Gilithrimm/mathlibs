@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static com.safenar.math.MyMath.*;
 
 class MyMathTest {
+    //test naming convention as of 2X2022: {testedMethod}_for{TestCase}()
 
     @Test
     void isNatural_forNaturalNumber() {

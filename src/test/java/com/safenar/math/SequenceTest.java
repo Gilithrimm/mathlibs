@@ -1,35 +1,44 @@
 package com.safenar.math;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
+import static com.safenar.math.Generators.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-//import com.test.api.*;
-
 class SequenceTest {
-    Sequence tested;
-    int[] expected=new int[]{0,1,4,9,10};
+    Sequence seq=new Sequence(0,10,POW);
 
-    @BeforeEach
-    void setUp(){
-        tested=new Sequence(0,10,Generators.POW);
+    @Test
+    void toArray_for() {
+        int[] expected={0,1,4,9,16,25,36,49,64,81,100};
+        int[] actual=seq.toArray();
+        assertArrayEquals(expected,actual);
     }
 
     @Test
-    void toArray() {
-        assertArrayEquals(expected,tested.toArray());
+    void value_forValueInSequence() {
+        int inSequence=5;
+        int value=seq.value(inSequence);
+        assertEquals(25,value);
+    }
+    @Test
+    void value_forValueNotInSequence(){
+        int notInSequence=25;
+        Executable result=()->seq.value(notInSequence);
+        assertThrows(IndexOutOfBoundsException.class,result);
     }
 
     @Test
-    void value() {
-        assertEquals(expected[0],tested.value(0));
-        assertEquals(expected[3],tested.value(3));
+    void indexOf_forIndexInSequence() {
+        int inSequence=25;
+        int index=seq.indexOf(inSequence);
+        assertEquals(5,index);
     }
-
     @Test
-    void indexOf(){
-        int num=625;
-        tested.setMax(1000);
-        assertEquals(Math.sqrt(num),tested.indexOf(num));
+    void indexOf_forIndexNotInSequence(){
+        int notInSequence=5;
+        Executable result=()->seq.indexOf(notInSequence);
+        assertThrows(IndexOutOfBoundsException.class,result);
     }
 }
