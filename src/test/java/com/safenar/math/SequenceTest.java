@@ -10,7 +10,7 @@ class SequenceTest {
     Sequence seq=new Sequence(0,10,POW);
 
     @Test
-    void toArray_for() {
+    void toArray_for() {//do we need this test? if not, then
         int[] expected={0,1,4,9,16,25,36,49,64,81,100};
         int[] actual=seq.toArray();
         assertArrayEquals(expected,actual);
