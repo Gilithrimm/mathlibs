@@ -1,6 +1,7 @@
 package com.safenar.math;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import static com.safenar.math.Generators.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -62,21 +63,6 @@ class MyMathTest {
 		}
 		
 		@Test
-		void isInSequence_forInSequence() {
-				Sequence sequence = new Sequence(0, 10, POW);
-				int needle = 25;
-				boolean actual = isInSequence(sequence, needle);
-				assertTrue(actual);
-				
-		}
-		@Test
-		void isInSequence_forNotInSequence() {
-				Sequence sequence = new Sequence(0, 10, POW);
-				int needle = 500;
-				boolean actual = isInSequence(sequence, needle);
-				assertFalse(actual);
-		}
-		@Test
 		void isInSequence_forNullSequence() {
 				Sequence seq = null;
 				int needle = 0;
@@ -93,24 +79,64 @@ class MyMathTest {
 				boolean actual = isInSequence(seq, nonZero);
 				assertFalse(actual);
 		}
+		//what if seq is empty eg. (generator=ANY)
+		// &(getLength()=0
+		// <=>(min=-1^max=-1)
+		// &(min=0^max=0))
+		//a^b<=>(a|b) & !(a&b) eg ^ is XOR
+		@Test
+		void isInSequence_forEmptySequence() {
+				Sequence seq = new Sequence(0, -1, SELF);
+				boolean actual = isInSequence(seq, 1);
+				assertFalse(actual);
+		}
+		@Test
+		void isInSequence_forInSequence() {
+				Sequence sequence = new Sequence(0, 10, POW);
+				int needle = 25;
+				boolean actual = isInSequence(sequence, needle);
+				assertTrue(actual);
+				
+		}
+		@Test
+		void isInSequence_forNotInSequence() {
+				Sequence sequence = new Sequence(0, 10, POW);
+				int needle = 500;
+				boolean actual = isInSequence(sequence, needle);
+				assertFalse(actual);
+		}
 		
 		@Test
-		void sum_forNullSequence() {
+		void sumOf_forNullSequence() {
 				Sequence seq = null;
-				int actual = sum(seq);
+				int actual = sumOf(seq);
 				assertEquals(-1, actual);
 		}
 		@Test
-		void sum_forNullGenerator() {
-				Sequence seq = new Sequence(0, 10, null);
-				int actual = sum(seq);
+		void sumOf_forEmptySequence() {
+				Sequence seq = new Sequence(0, -1, ABS);
+				int actual = sumOf(seq);
 				assertEquals(0, actual);
 		}
 		@Test
-		void sum_forPowersFrom1To10() {
+		void sumOf_forNullGenerator() {
+				Sequence seq = new Sequence(0, 10, null);
+				int actual = sumOf(seq);
+				assertEquals(0, actual);
+		}
+		@Test
+		void sumOf_forPowersFrom1To10() {
 				Sequence seq = new Sequence(1, 10, POW);
-				int actual = sum(seq);
+				int actual = sumOf(seq);
 				assertEquals(385, actual);
+		}
+		@Test
+		void sumOf_for11FibonacciFrom1To10() {
+				Sequence seq = new Sequence(1, 10, FIBONACCI);
+				int actual = sumOf(seq);
+				//sumOf(seq(1,10,fibGen(1,1))==fibGen(1,1).gen(12)-1
+				//sumOf(seq(1,n,fibGen(1,1))==fibGen(1,1).gen(n+2)-1
+				assertEquals(143, actual);
 		}
 		
 		@Test
@@ -125,6 +151,12 @@ class MyMathTest {
 				int actual = getProduct(seq);
 				assertEquals(0, actual);
 		}
+		@Test
+		void getProduct_forEmptySequence() {
+				Sequence seq = new Sequence(0, -1, NEG);
+				int actual = getProduct(seq);
+				assertEquals(1, actual);
+		}
 		
 		@Test
 		void getAverage_forNullSequence() {
@@ -137,6 +169,12 @@ class MyMathTest {
 				Sequence seq = new Sequence(0, 10, null);
 				int actual = getAverage(seq);
 				assertEquals(0, actual);
+		}
+		@Test
+		void getAverage_forEmptySequence() {
+				Sequence seq = new Sequence(0, -1, FIBONACCI);
+				Executable actual = () -> getAverage(seq);
+				assertThrows(ArithmeticException.class, actual);
 		}
 		
 		@Test
@@ -151,6 +189,12 @@ class MyMathTest {
 				int actual = getMedian(seq);
 				assertEquals(0, actual);
 		}
+		@Test
+		void getMedian_forEmptySequence() {
+				Sequence seq = new Sequence(0, -1, POW);
+				Executable actual = () -> getMedian(seq);
+				assertThrows(ArrayIndexOutOfBoundsException.class, actual);
+		}
 		
 		@Test
 		void getMode_forNullSequence() {
@@ -161,6 +205,12 @@ class MyMathTest {
 		@Test
 		void getMode_forNullGenerator() {
 				Sequence seq = new Sequence(0, 10, null);
+				int actual = getMode(seq);
+				assertEquals(0, actual);
+		}
+		@Test
+		void getMode_forEmptySequence() {
+				Sequence seq = new Sequence(0, -1, NULL);
 				int actual = getMode(seq);
 				assertEquals(0, actual);
 		}

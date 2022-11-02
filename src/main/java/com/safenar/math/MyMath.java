@@ -1,14 +1,20 @@
 package com.safenar.math;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class MyMath {
+		//TODO moar tests
+		@Contract(pure = true)
 		public static boolean isNatural(int number) {
 				return number == Math.abs(number);
 		}
 		
+		@Contract(pure = true)
 		public static boolean isPrime(int number) {
 				if (number < 2) return false;
 				if (number == 2) return true;
@@ -20,6 +26,7 @@ public class MyMath {
 		}
 		
 		//multiplies elements of sequence together
+		//shouldn't it be productOf(Seq), averageOf(Seq) etc.?
 		public static int getProduct(Sequence sequence) {
 				return nullCheck(sequence) == -1
 								? -1
@@ -34,9 +41,10 @@ public class MyMath {
 		public static int getAverage(Sequence seq) {
 				return nullCheck(seq) == -1
 								? -1
-								: sum(seq) / seq.getLength();
+								: sumOf(seq) / seq.getLength();
 		}
 		
+		//median - middle number (or avg of two) in sorted seq/set
 		public static int getMedian(Sequence sequence) {
 				if (nullCheck(sequence) == -1) return -1;
 				int[] sorted = Arrays.copyOf(sequence.toArray(), sequence.getLength());
@@ -45,31 +53,31 @@ public class MyMath {
 				return sorted.length % 2 == 0 ? (sorted[middle - 1] + sorted[middle]) / 2 : sorted[middle];
 		}
 		
+		//mode - number that appears most often in set/sequence/whatever you call it
 		public static int getMode(Sequence sequence) {
 				if (nullCheck(sequence) == -1) return -1;
-				int[] sorted = Arrays.copyOf(sequence.toArray(), sequence.getLength());
-				Arrays.sort(sorted);
-				int maxCount = 1;
-				int currentCount = 1;
-				int mode = sorted[0];
-				for (int i = 1; i < sorted.length; i++) {
-						if (sorted[i] == sorted[i - 1]) {
-								currentCount++;
-						} else {
-								if (currentCount > maxCount) {
-										maxCount = currentCount;
-										mode = sorted[i - 1];
-								}
-								currentCount = 1;
+				HashMap<Integer, Integer> map = new HashMap<>();
+				
+				for (Integer el : sequence)
+						if (map.containsKey(el))
+								map.put(el, map.get(el) + 1);
+						else
+								map.put(el, 1);
+				
+				var ref = new Object() {//temp to final vars for lambda
+						int highestValue = 0;
+						int mode = 0;
+				};
+				map.forEach((key, value) -> {
+						if (value > ref.highestValue) {//why vars in lambda must be final?
+								ref.highestValue = value;
+								ref.mode = key;
 						}
-				}
-				if (currentCount > maxCount) {
-						maxCount = currentCount;
-						mode = sorted[sorted.length - 1];
-				}
-				return mode;
+				});
+				return ref.mode;
 		}
 		
+		@Contract(value = "null, _ -> false")
 		public static boolean isInSequence(Sequence haystack, int needle) {
 				if (nullCheck(haystack) == -1) return false;
 				for (int i = haystack.getMin(); i < haystack.getMax(); i++)
@@ -78,7 +86,7 @@ public class MyMath {
 				return false;
 		}
 		
-		public static int sum(Sequence seq) {
+		public static int sumOf(Sequence seq) {
 				if (nullCheck(seq) == -1) return -1;
 				int result = 0;
 				for (int el : seq) {
