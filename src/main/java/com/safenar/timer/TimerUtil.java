@@ -17,19 +17,11 @@ public class TimerUtil {
         tasks = new ArrayList<>();
         size = 0;
     }
-
-    public boolean isRunning() {
-        return state == TimerState.RUNNING;
-    }
-
-    public boolean isStopped() {
-        return state == TimerState.STOPPED;
-    }
-
+    
     public void schedule(TimerTask task, long delay, long period) {
         ifCancelled();
         add(task, delay, period);
-        if (!isStopped()) {
+        if (state != TimerState.STOPPED) {
             if (period == 0)
                 timer.schedule(tasks.get(size).task, delay);
             else
@@ -66,7 +58,7 @@ public class TimerUtil {
 
     public void stop() {
         ifCancelled();
-        if (isStopped()) {
+        if (state == TimerState.STOPPED) {
             System.out.println("Timer already stopped!");
             return;
         }
@@ -87,7 +79,7 @@ public class TimerUtil {
 
     public void restart() {
         ifCancelled();
-        if (isRunning()) return;//or throw an Ex of some kind?
+        if (state == TimerState.RUNNING) return;//or throw an Ex of some kind?
         timer = new Timer();
         for (Task task : tasks) {
             if (task.period != 0)
