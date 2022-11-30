@@ -4,7 +4,6 @@ import java.util.TimerTask;
 
 //responsibility: improved TTask: can pause & resume
 class Task {
-    //TODO tests
     TimerTask task;
     String id;
     long delay, period, timeLeft;

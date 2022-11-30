@@ -5,7 +5,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class TimerUtil {
-    //TODO tests
     Timer timer;
     ArrayList<Task> tasks;
     int size;
@@ -43,7 +42,7 @@ public class TimerUtil {
     public void schedule(TimerTask task, long delay) {
         schedule(task, delay, 0);
     }
-
+    
     private void ifCancelled() {
         if (state == TimerState.TO_DESTROY)
             throw new IllegalStateException("Timer already cancelled!");
@@ -82,7 +81,7 @@ public class TimerUtil {
 //        timer = null;
         state = TimerState.TO_DESTROY;
         tasks = null;
-//        System.gc();
+        System.gc();
     }
 
     public void restart() {
@@ -97,7 +96,7 @@ public class TimerUtil {
                         task.task.run();
                     }
                 }, task.timeLeft, task.period);
-            else /*if (task.task) */timer.schedule(new TimerTask() {
+            else timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     task.task.run();
