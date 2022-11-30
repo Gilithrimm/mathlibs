@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.LongStream;
 
+// TODO: 30.11.2022 documentation shit 
 public class MathUtil {
 	@Contract(pure = true)
 	public static boolean isNatural(int number) {

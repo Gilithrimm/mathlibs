@@ -3,6 +3,7 @@ package com.safenar.timer;
 import java.util.TimerTask;
 
 //responsibility: improved TTask: can pause & resume
+// TODO: 30.11.2022 documentation shit
 class Task {
     TimerTask task;
     String id;

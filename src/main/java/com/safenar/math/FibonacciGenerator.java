@@ -2,6 +2,8 @@ package com.safenar.math;
 
 import java.math.BigInteger;
 
+// TODO: 30.11.2022 documentation shit
+/**@deprecated slow af*/
 public class FibonacciGenerator implements Generator {
 	int first, second;
 	

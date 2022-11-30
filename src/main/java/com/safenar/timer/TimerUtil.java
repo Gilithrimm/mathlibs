@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+// TODO: 30.11.2022 documentation shit
 public class TimerUtil {
     Timer timer;
     ArrayList<Task> tasks;

@@ -1,6 +1,7 @@
 package com.safenar.math;
 
 @FunctionalInterface
+// TODO: 30.11.2022 documentation shit
 public interface Generator {
 	int generate(int x);
 	

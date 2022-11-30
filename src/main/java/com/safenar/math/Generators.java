@@ -1,5 +1,6 @@
 package com.safenar.math;
 
+// TODO: 30.11.2022 documentation shit
 public enum Generators implements Generator {
 	NULL(x -> 0),
 	NEG(x -> -x),
@@ -7,6 +8,7 @@ public enum Generators implements Generator {
 	ABS(Math::abs),
 	POW(x -> x * x),
 	//fibGen(0,1)==fibGen(1,1)==fibGen(1,2)!==fibGen(1,1)!==fibGen(0,1)
+	/**@deprecated slow af: use in small cases (index<50)*/
 	FIBONACCI(new FibonacciGenerator(0, 1)),
 	;
 	
