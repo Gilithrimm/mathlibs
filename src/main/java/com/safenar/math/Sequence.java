@@ -35,7 +35,7 @@ public class Sequence implements Iterable<Integer> {
 	public long[] toArray() {
 		return LongStream.range(0, getLength())
 				.map(i -> value((int) (min + i)))
-				.toArray();//smh incompatible with Iter
+				.toArray();
 	}
 	
 	public int value(int x) {
