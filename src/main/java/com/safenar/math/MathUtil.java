@@ -1,20 +1,45 @@
 package com.safenar.math;
 
-import org.jetbrains.annotations.Contract;
-
-import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.LongStream;
 
-// TODO: 30.11.2022 documentation shit 
+import static java.lang.Math.sqrt;
+
+/**
+ * What (in my opinion) should be in {@link java.lang.Math} but is not.
+ * @author Gili
+ */
+// todo methods for calculating sequences shouldn't be here, but separated
 public class MathUtil {
-	@Contract(pure = true)
+	/**
+	 * The golden ratio.
+	 * @see <a href="https://en.wikipedia.org/wiki/Golden_ratio">
+	 *     A Wikipedia article about golden ratio</a>
+	 */
+	public static final double PHI=(1+sqrt(5))/2;
+	
+	/**
+	 * This class is not intended to be instantiated.
+	 */
+	private MathUtil() {
+	}
+	
+	/**
+	 * Checks if the number is natural, i.e. is an integer higher than or equal 0.
+	 * @param number checked number
+	 * @return true if the given number is natural, false otherwise
+	 */
 	public static boolean isNatural(int number) {
 		return number >= 0;
 	}
 	
-	@Contract(pure = true)
+	/**
+	 * Checks whether a number is prime or not
+	 * @param number checked number
+	 * @return true if the number is prime, false otherwise
+	 * @implNote this method uses Eratosthenes' sieve to determine if the number is prime
+	 */
 	public static boolean isPrime(int number) {
 		if (number < 2) return false;
 		if (number == 2) return true;
@@ -24,9 +49,11 @@ public class MathUtil {
 		}
 		return true;
 	}
-	
-	//multiplies elements of sequence together
-	//shouldn't it be productOf(Seq), averageOf(Seq) etc.?
+	/**
+	 * Multiplies elements of sequence together
+	 * @param sequence sequence we calculate product of
+	 * @return product of given sequence
+	 */
 	public static long productOf(Sequence sequence) {
 		return nullCheck(sequence) == -1
 				? -1
@@ -38,22 +65,34 @@ public class MathUtil {
 		return 0;
 	}
 	
-	public static int averageOf(Sequence seq) {
-		return nullCheck(seq) == -1
+	/**
+	 * Calculates the average of all elements of given sequence
+	 * @param seq given sequence
+	 * @return average of given sequence or -1 if the sequence is null
+	 */
+	public static double averageOf(Sequence seq) {
+		return nullCheck(seq)
 				? -1
 				: sumOf(seq) / seq.getLength();
 	}
 	
-	//median - middle number (or avg of two) in sorted seq/set
-	public static long medianOf(Sequence sequence) {
-		if (nullCheck(sequence) == -1) return -1;
-		long[] sorted = Arrays.copyOf(sequence.toArray(), sequence.getLength());
-		Arrays.sort(sorted);
-		int middle = sorted.length / 2;
-		return sorted.length % 2 == 0 ? (sorted[middle - 1] + sorted[middle]) / 2 : sorted[middle];
+	/**
+	 * Calculates the median, or the element in the middle of the sequence
+	 * @param seq sequence that we search median in
+	 * @return middle element (or average of both middle elements if there are
+	 */
+	public static double medianOf(Sequence seq) {
+		if (nullCheck(seq)) return -1;
+		return seq.getLength()%2==0
+				? (seq.value(seq.getLength()/2)+ seq.value(seq.getLength()/2+1))/2.0
+				: seq.value(seq.getLength()/2);
 	}
 	
-	//mode - number that appears most often in set/sequence/whatever you call it
+	/**
+	 * Calculates the mode, or the most common element of the sequence
+	 * @param sequence sequence we calculate mode of
+	 * @return element that appears most often in sequence or -1 if sequence is null
+	 */
 	public static int modeOf(Sequence sequence) {
 		if (nullCheck(sequence) == -1) return -1;
 		Map<Integer, Integer> map = new TreeMap<>();
@@ -74,10 +113,15 @@ public class MathUtil {
 				ref.mode = key;
 			}
 		});
-		return ref.mode;
+		return ref.mode; //java why
 	}
 	
-	@Contract(value = "null, _ -> false")
+	/**
+	 * Checks whether a given number is in the sequence
+	 * @param haystack a {@link Sequence} to search through
+	 * @param needle a searched number
+	 * @return true if needle is equal to any number in the sequence, false otherwise
+	 */
 	public static boolean isInSequence(Sequence haystack, int needle) {
 		if (nullCheck(haystack) == -1) return false;
 		for (int i = haystack.getMin(); i < haystack.getMax(); i++)
@@ -86,6 +130,11 @@ public class MathUtil {
 		return false;
 	}
 	
+	/**
+	 * Sums all values in the sequence
+	 * @param seq a {@link Sequence}
+	 * @return sum of all elements of a sequence or -1 if sequence is null
+	 */
 	public static int sumOf(Sequence seq) {
 		if (nullCheck(seq) == -1) return -1;
 		int result = 0;
@@ -94,8 +143,4 @@ public class MathUtil {
 		}
 		return result;
 	}
-	
-	//    public static int randomInRange(Range range){
-	//        return new Random().nextInt(range.getLength())+range.getMin();
-	//    }//not that useful atm and not deterministic, thus not testable for my knowledge
 }

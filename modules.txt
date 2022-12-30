@@ -1,0 +1,9 @@
+Modules in here (from most to least finished):
+-Sequences (math) = 95% (requires javadoc): sequences, ranges & that part of math
+-Timer Utilities (timer) = 90% (requires javadoc): a timer that can stop, built on top of
+java.util.Timer
+-JSON Adapter (json) = 0% (requires reimplementation): adapter for if I need to change
+ JSON libraries quickly
+-Values (values) = <5% (requires code): reimplementing java's types (& non-final String)
+-Swing Utilities Of Sorts (swing) = 0% (requires plan): just to make creating gui easier
+ w/o changing to fx, maybe with css-alike lang support

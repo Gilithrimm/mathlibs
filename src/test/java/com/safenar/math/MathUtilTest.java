@@ -167,57 +167,57 @@ class MathUtilTest {
 	@Test
 	void averageOf_forNullSequence() {
 		Sequence seq = null;
-		int actual = averageOf(seq);
+		double actual = averageOf(seq);
 		assertEquals(-1, actual);
 	}
 	@Test
 	void averageOf_forNullGenerator() {
 		Sequence seq = new Sequence(0, 10, null);
-		int actual = averageOf(seq);
+		double actual = averageOf(seq);
 		assertEquals(0, actual);
 	}
 	@Test
 	void averageOf_forEmptySequence() {
-		Sequence seq = new Sequence(0, -1, FIBONACCI);
-		Executable actual = () -> averageOf(seq);
-		assertThrows(ArithmeticException.class, actual);
+		Sequence seq = new Sequence(0, -1, FIB/*ONACCI*/);
+		Executable actual = () -> averageOf(seq);//1/0->ArithmeticEx, 1/0.0->no ex
+		assertDoesNotThrow(actual);//why
 	}
 	@Test
 	void averageOf_forPowersFrom1To10() {
 		Sequence sequence=new Sequence(1,10,POW);
-		long actual= averageOf(sequence);
-		assertEquals(38L,actual);
+		double actual= averageOf(sequence);
+		assertEquals(38.5,actual);
 	}
 
 	@Test
 	void medianOf_forNullSequence() {
 		Sequence seq = null;
-		long actual = medianOf(seq);
+		double actual = medianOf(seq);
 		assertEquals(-1, actual);
 	}
 	@Test
 	void medianOf_forNullGenerator() {
 		Sequence seq = new Sequence(0, 10, null);
-		long actual = medianOf(seq);
+		double actual = medianOf(seq);
 		assertEquals(0, actual);
 	}
 	@Test
 	void medianOf_forEmptySequence() {
 		Sequence seq = new Sequence(0, -1, POW);
 		Executable actual = () -> medianOf(seq);
-		assertThrows(ArrayIndexOutOfBoundsException.class, actual);
+		assertThrows(IndexOutOfBoundsException.class, actual);
 	}
 	@Test
 	void medianOf_forEvenLength(){
 		Sequence seq=new Sequence(1,10,POW);
-		long actual= medianOf(seq);
-		assertEquals(30L,actual);
+		double actual= medianOf(seq);
+		assertEquals(30.5,actual);
 	}
 	@Test
 	void medianOf_forOddLength(){
 		Sequence seq=new Sequence(0,10,POW);
-		long median = medianOf(seq);
-		assertEquals(25L,median);
+		double median = medianOf(seq);
+		assertEquals(25,median);
 	}
 
 	@Test
