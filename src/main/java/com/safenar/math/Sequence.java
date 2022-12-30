@@ -1,8 +1,9 @@
 package com.safenar.math;
 
-import com.safenar.Main;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.stream.LongStream;
 
 /**
