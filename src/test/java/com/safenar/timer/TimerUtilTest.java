@@ -38,15 +38,11 @@ class TimerUtilTest {
 
     @AfterEach
     void tearDown() {
-//        timer.stop();//this shit fails 3-4 tests, lack of it burns my pc
         timer.cancel();//commenting this out=+100 fails
         hi.cancel();
         counter.cancel();
-//        timer.tasks.clear();
         timer = null;
         ref.counter=0;
-//        hi = null;
-//        System.gc();
     }
 
     @Test
@@ -198,7 +194,7 @@ class TimerUtilTest {
     void cancel_forTimerWithoutTasks() {
         timer.cancel();
         assertNull(timer.tasks);
-        assertEquals(TimerState.TO_DESTROY,timer.state);
+        assertEquals(TimerStates.TO_DESTROY,timer.getState());
     }
     @Test
     void cancel_forTimerWithTasks() {
