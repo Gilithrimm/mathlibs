@@ -132,7 +132,7 @@ class MathUtilTest {
 	}
 	@Test
 	void sumOf_for11FibonacciFrom1To10() {
-		Sequence seq = new Sequence(1, 10, FIBONACCI);
+		Sequence seq = new Sequence(1, 10, FIB);
 		int actual = sumOf(seq);
 		//sumOf(seq(1,10,fibGen(1,1))==fibGen(1,1).gen(12)-1
 		//sumOf(seq(1,n,fibGen(1,1))==fibGen(1,1).gen(n+2)-1

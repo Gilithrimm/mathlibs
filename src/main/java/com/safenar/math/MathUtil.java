@@ -55,14 +55,13 @@ public class MathUtil {
 	 * @return product of given sequence
 	 */
 	public static long productOf(Sequence sequence) {
-		return nullCheck(sequence) == -1
+		return nullCheck(sequence)
 				? -1
 				: LongStream.of((sequence.toArray())).reduce(1, (a, b) -> a * b);
 	}
 	
-	private static int nullCheck(Sequence seq) {
-		if (seq == null) return -1;
-		return 0;
+	private static boolean nullCheck(Sequence seq) {
+		return seq==null;
 	}
 	
 	/**
@@ -73,7 +72,7 @@ public class MathUtil {
 	public static double averageOf(Sequence seq) {
 		return nullCheck(seq)
 				? -1
-				: sumOf(seq) / seq.getLength();
+				: 1.0 * sumOf(seq) / seq.getLength();
 	}
 	
 	/**
@@ -94,7 +93,7 @@ public class MathUtil {
 	 * @return element that appears most often in sequence or -1 if sequence is null
 	 */
 	public static int modeOf(Sequence sequence) {
-		if (nullCheck(sequence) == -1) return -1;
+		if (nullCheck(sequence)) return -1;
 		Map<Integer, Integer> map = new TreeMap<>();
 		
 		for (Integer el : sequence)
@@ -123,7 +122,7 @@ public class MathUtil {
 	 * @return true if needle is equal to any number in the sequence, false otherwise
 	 */
 	public static boolean isInSequence(Sequence haystack, int needle) {
-		if (nullCheck(haystack) == -1) return false;
+		if (nullCheck(haystack)) return false;
 		for (int i = haystack.getMin(); i < haystack.getMax(); i++)
 			if (needle == haystack.value(i))
 				return true;
@@ -136,7 +135,7 @@ public class MathUtil {
 	 * @return sum of all elements of a sequence or -1 if sequence is null
 	 */
 	public static int sumOf(Sequence seq) {
-		if (nullCheck(seq) == -1) return -1;
+		if (nullCheck(seq)) return -1;
 		int result = 0;
 		for (int el : seq) {
 			result += el;

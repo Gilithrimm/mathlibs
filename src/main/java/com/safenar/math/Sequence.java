@@ -49,7 +49,7 @@ public class Sequence implements Iterable<Integer> {
 	 * @apiNote if this method returns 0, then this sequence is empty
 	 * */
 	public int getLength() {
-		return getMax() - getMin() + 1;
+		return max - min + 1;
 	}
 	
 	/**
@@ -69,10 +69,10 @@ public class Sequence implements Iterable<Integer> {
 	 * @param index position of the value
 	 * */
 	public int value(int index) {
-		int result = getGenerator().generate(index);
-		if (result > generator.generate(getMax()))
-			throw new IndexOutOfBoundsException(index +" is out of bounds ");
-		return result;
+		if (index>max||index<min)
+			throw new IndexOutOfBoundsException("There's no value at this index (%d) in this sequence: %s"
+					.formatted(index,toString()));
+		return generator.generate(index);
 	}
 	
 	/**
@@ -83,7 +83,7 @@ public class Sequence implements Iterable<Integer> {
 	 * @implNote It will return only <b>first</b> matching index
 	 * */
 	public int indexOf(int value) {
-		for (int i = getMin(); i < getMax(); i++) {
+		for (int i = min; i < max; i++) {
 			if (value == value(i)) {
 				return i;
 			}
@@ -104,14 +104,14 @@ public class Sequence implements Iterable<Integer> {
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (!(o instanceof Sequence sequence)) return false;
-		return getMin() == sequence.getMin()
-				&& getMax() == sequence.getMax()
-				&& getGenerator().equals(sequence.getGenerator());
+		return min == sequence.min
+				&& max == sequence.max
+				&& generator.equals(sequence.generator);
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(getMin(), getMax(), getGenerator().hash());
+		return Objects.hash(min, max, generator.hash());
 	}
 	
 	@Override
@@ -124,9 +124,9 @@ public class Sequence implements Iterable<Integer> {
 		private final Generator gen;//breakdown to avoid recursion
 		
 		public Iter(Sequence seq) {
-			gen = seq.getGenerator();
-			max = seq.getMax();
-			min=seq.getMin();
+			gen = seq.generator;
+			max = seq.max;
+			min=seq.min;
 		}
 		
 		@Override

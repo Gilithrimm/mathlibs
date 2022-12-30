@@ -30,7 +30,17 @@ public class FibonacciGenerator implements Generator {
 	
 	@Override
 	public int generate(int x) {
-		return generate((long) x).intValue();
+		if (x==0) return first;
+		if (x==1) return second;
+		int a = first, b = second;
+		for (int i = 2; i <= x; i++) {
+			int c = a + b;
+			a = b;
+			b = c;
+		}//f(x)=f(x-1)+f(x-2)
+		//f(x)=-f(x+1)+f(x+2)
+		return b;
+//		return generate((long) x).intValue();
 	}
 	
 	//todo type extension
@@ -41,9 +51,9 @@ public class FibonacciGenerator implements Generator {
 	 * @deprecated uses most common (and very slow) recursive algorithm
 	 */
 	public BigInteger generate(long x) {
-		if (x == 0) return BigInteger.valueOf(first);
-		if (x == 1) return BigInteger.valueOf(second);
-		if (x>1) return generate(x - 2).add(generate(x - 1));
-		return generate(x+1).add(generate(x+2));
+		if (x == 0) return BigInteger.valueOf(first);//1st
+		if (x == 1) return BigInteger.valueOf(second);//2nd
+		if (x>1) return generate(x - 2).add(generate(x - 1));//up
+		return generate(x+1).negate().add(generate(x+2));//down (f(x+1)*(-1))+f(x+2)
 	}
 }

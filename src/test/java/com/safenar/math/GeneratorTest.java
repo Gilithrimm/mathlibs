@@ -22,7 +22,7 @@ class GeneratorTest {
 	@Test
 	void string_forPreMadeGenerator() {
 		var gen = Generators.POW;
-		String actual = gen.toString();
+		String actual = gen.string();
 		assertEquals("""
 				-5 -> 25;
 				-4 -> 16;

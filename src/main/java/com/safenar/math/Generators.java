@@ -57,13 +57,8 @@ public enum Generators implements Generator {
 		if (gen == null)
 			return NULL;
 		for (Generators value : values())
-			if (gen.equals(value.getGen()))
+			if (gen.equals(value.gen))
 				return value;
 		return NULL;
-	}
-	
-	@Override
-	public String toString() {
-		return gen.string();
 	}
 }

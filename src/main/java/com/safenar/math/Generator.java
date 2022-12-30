@@ -31,8 +31,8 @@ public interface Generator {
 	 */
 	default int hash() {
 		int hash = 0;
-		for (int i = -5; i <= 5; i++)
-			hash = hash * 31 + generate(i);
+		for (int i = -5; i <= 5; i++)//todo explain
+			hash = hash * 31 + generate(i);//todo these lines in docs
 		return hash;
 	}
 	
