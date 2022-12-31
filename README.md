@@ -37,6 +37,8 @@ todo how does GitHub work and handle things like this
 If you need to generate the javadoc for the project, run 
 `./javadoc.sh`
 
+Found any bug or enhancement? Add it to the [Issue tracker](https://github.com/Gilithrimm/mathlibs/issues)!
+
 [//]: # (How can one add their code 
     to your repo and help ya)
 
