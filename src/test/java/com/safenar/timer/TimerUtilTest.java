@@ -9,7 +9,7 @@ import java.util.TimerTask;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TimerUtilTest {
+public class TimerUtilTest {
     TimerUtil timer;
     TimerTask hi;
     TimerTask counter;
@@ -19,7 +19,7 @@ class TimerUtilTest {
     final Editable ref= new Editable();
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         timer = new TimerUtil();
         counter= new TimerTask() {
             @Override
@@ -37,7 +37,7 @@ class TimerUtilTest {
     }
 
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         timer.cancel();//commenting this out=+100 fails
         hi.cancel();
         counter.cancel();
@@ -46,13 +46,13 @@ class TimerUtilTest {
     }
 
     @Test
-    void schedule_forCancelledTimer() {
+    public void schedule_forCancelledTimer() {
         timer.cancel();
         Executable actual = () -> timer.schedule(hi, 10);
         assertThrows(IllegalStateException.class, actual);
     }
     @Test
-    void schedule_forNullTask() {
+    public void schedule_forNullTask() {
         Executable actual = () -> timer.schedule(null, 1);
         try {
             Thread.sleep(2);
@@ -62,17 +62,17 @@ class TimerUtilTest {
         assertThrows(NullPointerException.class, actual);
     }
     @Test
-    void schedule_forNegativeDelay() {
+    public void schedule_forNegativeDelay() {
         Executable actual = () -> timer.schedule(hi, -1);
         assertThrows(IllegalArgumentException.class, actual);
     }
     @Test
-    void schedule_forNegativePeriod() {
+    public void schedule_forNegativePeriod() {
         Executable actual = () -> timer.schedule(hi, 1, -1);
         assertThrows(IllegalArgumentException.class, actual);
     }
     @Test
-    void schedule_forStoppedTimer() {
+    public void schedule_forStoppedTimer() {
         timer.stop();
         timer.schedule(counter, 5);
         try {
@@ -83,7 +83,7 @@ class TimerUtilTest {
         assertEquals(0, ref.counter);
     }
     @Test
-    void schedule_forResumedTimer() {
+    public void schedule_forResumedTimer() {
         schedule_forStoppedTimer();
         timer.restart();
         try {
@@ -94,7 +94,7 @@ class TimerUtilTest {
         assertEquals(1, ref.counter);
     }
     @Test
-    void schedule_forOneTimeAction() {
+    public void schedule_forOneTimeAction() {
         timer.schedule(counter, 5);
         try {
             Thread.sleep(15);
@@ -105,7 +105,7 @@ class TimerUtilTest {
     }
 //    @RepeatedTest(5000)
     @Test//TODO >90% passes
-    synchronized void schedule_forRepeatedAction() {
+    public synchronized void schedule_forRepeatedAction() {
         synchronized (ref) {
             timer.schedule(counter, 5, 5);
         }
@@ -118,19 +118,19 @@ class TimerUtilTest {
     }
 
     @Test
-    void pause_forCancelledTimer() {
+    public void pause_forCancelledTimer() {
         timer.cancel();
         Executable actual = timer::stop;
         assertThrows(IllegalStateException.class, actual);
     }
     @Test
-    void pause_forStoppedTimer() {
+    public void pause_forStoppedTimer() {
         timer.stop();
         Executable actual=timer::stop;
         assertDoesNotThrow(actual);
     }
     @Test
-    void pause_forTimerWithTasks() {
+    public void pause_forTimerWithTasks() {
         timer.schedule(counter,5);
         timer.schedule(counter,5,5);
         timer.stop();
@@ -143,18 +143,18 @@ class TimerUtilTest {
     }
 
     @Test
-    void restart_forCancelledTimer() {
+    public void restart_forCancelledTimer() {
         timer.cancel();
         Executable actual = timer::restart;
         assertThrows(IllegalStateException.class, actual);
     }
     @Test
-    void restart_forWorkingTimer() {
+    public void restart_forWorkingTimer() {
         Executable actual=timer::restart;
         assertDoesNotThrow(actual);
     }
     @Test
-    void restart_forTimerWithTasks() {
+    public void restart_forTimerWithTasks() {
         class CounterTask extends TimerTask{
             final Editable ref=new Editable();
             @Override
@@ -185,19 +185,19 @@ class TimerUtilTest {
     }
 
     @Test
-    void cancel_forCancelledTimer() {
+    public void cancel_forCancelledTimer() {
         timer.cancel();
         Executable actual=timer::cancel;
         assertDoesNotThrow(actual);
     }
     @Test
-    void cancel_forTimerWithoutTasks() {
+    public void cancel_forTimerWithoutTasks() {
         timer.cancel();
         assertNull(timer.tasks);
         assertEquals(TimerStates.TO_DESTROY,timer.getState());
     }
     @Test
-    void cancel_forTimerWithTasks() {
+    public void cancel_forTimerWithTasks() {
         timer.schedule(counter,5,5);
         cancel_forTimerWithoutTasks();
         try {

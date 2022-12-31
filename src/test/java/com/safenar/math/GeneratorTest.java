@@ -4,23 +4,23 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class GeneratorTest {
+public class GeneratorTest {
 	
 	@Test
-	void hash_forPreMadeGenerator() {
+	public void hash_forPreMadeGenerator() {
 		var gen = Generators.POW;
 		int actual = gen.hash();
 		assertEquals(-640718498, actual);
 	}
 	@Test
-	void hash_forCustomGenerator() {
+	public void hash_forCustomGenerator() {
 		Generator gen = x -> 2 * x;
 		int hash = gen.hash();
 		assertEquals(167235456, hash);
 	}
 	
 	@Test
-	void string_forPreMadeGenerator() {
+	public void string_forPreMadeGenerator() {
 		var gen = Generators.POW;
 		String actual = gen.string();
 		assertEquals("""
@@ -38,7 +38,7 @@ class GeneratorTest {
 				""", actual);
 	}
 	@Test
-	void string_forCustomGenerator() {
+	public void string_forCustomGenerator() {
 		Generator gen = x -> x * 2;
 		String expected = """
 				-5 -> -10;
