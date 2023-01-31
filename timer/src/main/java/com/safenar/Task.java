@@ -1,9 +1,8 @@
-package com.safenar.timer;
+package com.safenar;
 
 import java.util.TimerTask;
 
 //responsibility: improved TTask: can pause & resume
-// TODO: 30.11.2022 documentation shit
 
 /**
  * This class was meant to be (to some extent) a replacement for {@link TimerTask}

@@ -1,11 +1,11 @@
-package com.safenar.math;
+package com.safenar;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import static com.safenar.math.Generators.*;
+import static com.safenar.Generators.*;
+import static com.safenar.MathUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static com.safenar.math.MathUtil.*;
 
 public class MathUtilTest {
 	//test naming convention as of 2X2022: {testedMethod}_for{TestCase}()

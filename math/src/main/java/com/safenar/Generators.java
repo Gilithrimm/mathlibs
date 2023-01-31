@@ -1,15 +1,15 @@
-package com.safenar.math;
+package com.safenar;
 
 /**
  * Set of simple generators pre-coded for quick use.
  * That shouldn't discourage you from making your own {@linkplain Generator generators} though.
  * */
 public enum Generators implements Generator {
-	/**{@summary Default Generator. Returns series of 0s (f(x)=0).}*/
+	/**{@summary Default com.safenar.Generator. Returns series of 0s (f(x)=0).}*/
 	NULL(x -> 0),
-	/**{@summary Negative Generator. Returns given values, inverted (f(x)=-x).}*/
+	/**{@summary Negative com.safenar.Generator. Returns given values, inverted (f(x)=-x).}*/
 	NEG(x -> -x),
-	/**{@summary Basic Generator. Returns values passed as arguments (f(x)=x).}*/
+	/**{@summary Basic com.safenar.Generator. Returns values passed as arguments (f(x)=x).}*/
 	SELF(x -> x),
 	/**Returns absolute values of passed arguments (f(x)=|x|).
 	 * @see Math#abs(int)*/
@@ -51,7 +51,7 @@ public enum Generators implements Generator {
 	 * Matches the generator to one of pre-coded ones.
 	 * @param gen generator we try matching
 	 * @return an enum that is {@link Generator#equals(Generator) equal}
-	 * to the given Generator or {@link Generators#NULL} if gen is null or there's no match
+	 * to the given com.safenar.Generator or {@link Generators#NULL} if gen is null or there's no match
 	 * */
 	public static Generators fromGenerator(Generator gen) {
 		if (gen == null)

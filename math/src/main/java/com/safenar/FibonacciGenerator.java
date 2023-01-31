@@ -1,4 +1,4 @@
-package com.safenar.math;
+package com.safenar;
 
 import java.math.BigInteger;
 

@@ -6,7 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mathlibs" />
+        <module name="json" />
+        <module name="timer" />
+        <module name="math" />
+        <module name="values" />
       </profile>
     </annotationProcessing>
   </component>

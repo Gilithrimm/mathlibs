@@ -1,7 +1,7 @@
-package com.safenar.math;
+package com.safenar;
 
 /**
- * A Generator is a function by which {@link Sequence sequences} are generated.
+ * A com.safenar.Generator is a function by which {@link Sequence sequences} are generated.
  * */
 @FunctionalInterface
 public interface Generator {
@@ -24,10 +24,10 @@ public interface Generator {
 	
 	/**
 	 * Use this instead of {@link Object#hashCode()}
-	 * @deprecated hash code from this implementation remains the same for the same Generator across
+	 * @deprecated hash code from this implementation remains the same for the same com.safenar.Generator across
 	 * different executions, which collides with first point of the {@link Object#hashCode()}
 	 * @implNote indexes of the values are between -5 and 5, both inclusive
-	 * @return hash of this Generator
+	 * @return hash of this com.safenar.Generator
 	 */
 	default int hash() {
 		int hash = 0;
@@ -38,8 +38,8 @@ public interface Generator {
 	
 	/**
 	 * Use this instead of {@link Object#toString()}
-	 * @return string representation of this Generator
-	 * @implSpec since there's no simple way to get the equation this Generator represents,
+	 * @return string representation of this com.safenar.Generator
+	 * @implSpec since there's no simple way to get the equation this com.safenar.Generator represents,
 	 * we just generate values for indexes between -5 and 5
 	 */
 	default String string() {

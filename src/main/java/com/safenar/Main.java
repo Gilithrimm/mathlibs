@@ -13,7 +13,7 @@ public class Main {
         return builder.toString();
     }
     
-    //TODO or remove entirely
+    //TODO time measuring module
     public static String formatTime(long millis) {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
         Date date = new Date(millis);

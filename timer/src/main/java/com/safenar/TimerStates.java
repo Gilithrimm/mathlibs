@@ -1,4 +1,4 @@
-package com.safenar.timer;
+package com.safenar;
 
 /**
  * States in which {@link TimerUtil timer} can be.

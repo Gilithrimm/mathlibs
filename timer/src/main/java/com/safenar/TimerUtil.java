@@ -1,4 +1,4 @@
-package com.safenar.timer;
+package com.safenar;
 
 import java.util.ArrayList;
 import java.util.Timer;
