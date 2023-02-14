@@ -50,6 +50,11 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <groupId>maven</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>1.9</version>
+            </plugin>
         </plugins>
     </build>
 </project>
