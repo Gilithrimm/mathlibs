@@ -16,14 +16,17 @@ repositories {
 
 dependencies {
     api 'org.junit.jupiter:junit-jupiter:5.9.0'
-    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
 }
 
 group = 'com.safenar'
-version = '1.1.0'
+version = '1.0.2'
 java.sourceCompatibility = JavaVersion.VERSION_19
 
-/*
+test {
+    useJUnitPlatform()
+}
+
 publishing {
     publications {
         maven(MavenPublication) {
@@ -31,7 +34,7 @@ publishing {
         }
     }
 }
-*/
+
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
