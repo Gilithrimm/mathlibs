@@ -3,6 +3,8 @@
 modules.txt
 .gradle
 /build/
+*/build
+
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -12,7 +14,6 @@ gradle-app.setting
 
 # Cache of project
 .gradletasknamecache
-target/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
