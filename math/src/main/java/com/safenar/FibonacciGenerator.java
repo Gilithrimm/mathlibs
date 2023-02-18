@@ -48,8 +48,9 @@ public class FibonacciGenerator implements Generator {
 	 * tried extending type of this generator
 	 * @param x index or the position of the element in sequence
 	 * @return generated element based on index
-	 * @deprecated uses most common (and very slow) recursive algorithm
+	 * @deprecated uses most common (and very slow) recursive algorithm <br>also it's nowhere near tested
 	 */
+	@Deprecated
 	public BigInteger generate(long x) {
 		if (x == 0) return BigInteger.valueOf(first);//1st
 		if (x == 1) return BigInteger.valueOf(second);//2nd

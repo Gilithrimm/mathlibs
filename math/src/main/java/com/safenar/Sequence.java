@@ -112,7 +112,7 @@ public class Sequence implements Iterable<Integer> {
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(min, max, generator.hash());
+		return Objects.hash(min, max, generator);
 	}
 	
 	@Override

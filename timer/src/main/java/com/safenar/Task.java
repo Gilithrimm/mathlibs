@@ -64,6 +64,7 @@ public class Task {
      * <b>Use at your risk.</b>
      * @see TimerTask#cancel()
      */
+    @Deprecated
     public void cancel(){
         task.cancel();
     }

@@ -29,6 +29,7 @@ public interface Generator {
 	 * @implNote indexes of the values are between -5 and 5, both inclusive
 	 * @return hash of this com.safenar.Generator
 	 */
+	@Deprecated
 	default int hash() {
 		int hash = 0;
 		for (int i = -5; i <= 5; i++)//todo explain

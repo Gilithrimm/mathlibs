@@ -37,6 +37,7 @@ public enum Generators implements Generator {
 	 * @deprecated it's pretty much useless as each of the enums <b>is</b> {@linkplain Generator a generator}.
 	 * @return the underlying generator
 	 */
+	@Deprecated
 	public Generator getGen() {
 		return gen;
 	}
