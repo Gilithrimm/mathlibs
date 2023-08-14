@@ -16,12 +16,10 @@ public enum Generators implements Generator {
 	ABS(Math::abs),
 	/**Returns passed arguments to the power of two (f(x)=x<sup>2</sup>).*/
 	POW(x -> x * x),
-	//fibGen(0,1)==fibGen(1,1)==fibGen(1,2)!==fibGen(1,1)!==fibGen(0,1)
 	/**Returns consecutive elements of the Fibonacci sequence (f(x)=f(x-1)+f(x-2)).
 	 * @implNote element at index 0 is 0, and at index 1 there is 1; rest is generated like normal
 	 * */
 	FIB(new FibonacciGenerator(0, 1)),
-//	LN(a -> (int) Math.log10(a))
 	;
 	/**
 	 * The underlying generator.

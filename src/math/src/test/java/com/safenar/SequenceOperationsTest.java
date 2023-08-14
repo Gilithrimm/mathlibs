@@ -4,64 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import static com.safenar.Generators.*;
-import static com.safenar.MathUtil.*;
+import static com.safenar.SequenceOperations.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MathUtilTest {
-	//test naming convention as of 2X2022: {testedMethod}_for{TestCase}()
-
-	@Test
-	public void isNatural_forNaturalNumber() {
-		int number = 1;
-		boolean actual = isNatural(number);
-		assertTrue(actual);
-	}
-	@Test
-	public void isNatural_forNonNaturalNumber() {
-		int number = -1;
-		boolean actual = isNatural(number);
-		assertFalse(actual);
-	}
-	@Test
-	public void isNatural_forZero() {
-		int number = 0;
-		boolean actual = isNatural(number);
-		assertTrue(actual);
-	}
-
-	@Test
-	public void isPrime_forPrime() {
-		int prime = 11;
-		boolean actual = isPrime(prime);
-		assertTrue(actual);
-	}
-	@Test
-	public void isPrime_forNonPrime() {
-		int nonPrime = 327;
-		boolean actual = isPrime(nonPrime);
-		assertFalse(actual);
-	}
-	@Test
-	public void isPrime_forOne() {
-		int one = 1;
-		boolean actual = isPrime(one);
-		assertFalse(actual);
-	}
-	@Test
-	public void isPrime_forZero() {
-		int zero = 0;
-		boolean actual = isPrime(zero);
-		assertFalse(actual);
-	}
-	@Test
-	public void isPrime_forNegative() {
-		//we can either 1) treat negative values with abs()
-		//or 2) not pass them through
-		int negative = -5;
-		boolean actual = isPrime(negative);
-		assertFalse(actual);//I'm doing 2)
-	}
-
+class SequenceOperationsTest {
 	@Test
 	public void isInSequence_forNullSequence() {
 		Sequence seq = null;
@@ -91,7 +37,7 @@ public class MathUtilTest {
 		int needle = 25;
 		boolean actual = isInSequence(sequence, needle);
 		assertTrue(actual);
-
+		
 	}
 	@Test
 	public void isInSequence_forNotInSequence() {
@@ -100,7 +46,7 @@ public class MathUtilTest {
 		boolean actual = isInSequence(sequence, needle);
 		assertFalse(actual);
 	}
-
+	
 	@Test
 	public void sumOf_forNullSequence() {
 		Sequence seq = null;
@@ -133,7 +79,7 @@ public class MathUtilTest {
 		//sumOf(seq(1,n,fibGen(1,1))==fibGen(1,1).gen(n+2)-1
 		assertEquals(143, actual);
 	}
-
+	
 	@Test
 	public void productOf_forNullSequence() {
 		Sequence seq = null;
@@ -158,7 +104,7 @@ public class MathUtilTest {
 		long actual= productOf(seq);
 		assertEquals(13168189440000L,actual);
 	}
-
+	
 	@Test
 	public void averageOf_forNullSequence() {
 		Sequence seq = null;
@@ -183,7 +129,7 @@ public class MathUtilTest {
 		double actual= averageOf(sequence);
 		assertEquals(38.5,actual);
 	}
-
+	
 	@Test
 	public void medianOf_forNullSequence() {
 		Sequence seq = null;
@@ -214,7 +160,7 @@ public class MathUtilTest {
 		double median = medianOf(seq);
 		assertEquals(25,median);
 	}
-
+	
 	@Test
 	public void modeOf_forNullSequence() {
 		Sequence seq = null;
