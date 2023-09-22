@@ -10,7 +10,7 @@ public interface Generator {
 	 * @param x index or the position of the element in sequence
 	 * @return generated element based on index*/
 	int generate(int x);
-	
+	//todo it's all useless
 	/**
 	 * Use this instead of {@link Object#equals(Object)}
 	 * @param other the generator to be compared

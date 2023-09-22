@@ -1,8 +1,8 @@
 //root project of multi-project builds doesn't have build.gradle
 //gradle supports kebab-case, like Github
 rootProject.name = 'mathlibs'
-include('src:json')
-include(':src:math')
-include('src:values')
-include('src:timer')
-include("src:main")
+include('modules:json')
+include(':modules:math')
+include('modules:values')
+include('modules:timer')
+include("modules:main")
